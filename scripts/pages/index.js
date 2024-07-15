@@ -44,3 +44,39 @@
     
     init();
     
+// Chemin vers le fichier JSON
+const url = './data/photographers.json';
+
+// Fonction pour récupérer les données via fetch
+fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Récupération des photographes depuis les données JSON
+        const photographers = data.photographers;
+
+        // Affichage des photographes dans la console pour vérification
+        console.log('Photographes:', photographers);
+
+        // Construction de l'HTML à insérer dans #photographers-list
+        const photographersList = document.getElementById('photographers-list');
+        photographers.forEach(photographer => {
+            const photographerCard = `
+                <div>
+                    <h2>${photographer.name}</h2>
+                    <p>${photographer.city}, ${photographer.country}</p>
+                    <p>${photographer.tagline}</p>
+                    <p>${photographer.price}€ / jour</p>
+                    <img src="./data/${photographer.portrait}" alt="${photographer.name}">
+                </div>
+            `;
+            photographersList.innerHTML += photographerCard;
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
