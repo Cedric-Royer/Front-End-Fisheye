@@ -47,6 +47,9 @@
 // Chemin vers le fichier JSON
 const url = './data/photographers.json';
 
+// Chemin vers le dossier contenant les portraits des photographes
+const portraitPath = 'assets/photographers/IDPhotos/';
+
 // Fonction pour récupérer les données via fetch
 fetch(url)
     .then(response => {
@@ -71,7 +74,7 @@ fetch(url)
                     <p>${photographer.city}, ${photographer.country}</p>
                     <p>${photographer.tagline}</p>
                     <p>${photographer.price}€ / jour</p>
-                    <img src="./data/${photographer.portrait}" alt="${photographer.name}">
+                    <img src="${portraitPath}${photographer.portrait}" alt="${photographer.name}">
                 </div>
             `;
             photographersList.innerHTML += photographerCard;
