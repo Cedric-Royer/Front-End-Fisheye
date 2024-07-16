@@ -69,13 +69,13 @@ fetch(url)
         const photographersList = document.getElementById('photographers-list');
         photographers.forEach(photographer => {
             const photographerCard = `
-                <div>
+                <article>
+                    <img src="${portraitPath}${photographer.portrait}" alt="${photographer.name}">
                     <h2>${photographer.name}</h2>
                     <p>${photographer.city}, ${photographer.country}</p>
                     <p>${photographer.tagline}</p>
                     <p>${photographer.price}€ / jour</p>
-                    <img src="${portraitPath}${photographer.portrait}" alt="${photographer.name}">
-                </div>
+                </article>
             `;
             photographersList.innerHTML += photographerCard;
         });
