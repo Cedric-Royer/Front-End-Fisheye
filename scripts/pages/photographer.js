@@ -35,13 +35,10 @@ console.log(photographerId);
         // Crée une instance de photographerTemplate avec les données du photographe
         const photographer = photographerTemplate(photographerInfo);
 
-        // Utilise getPhotographerHead pour obtenir l'élément DOM
-        const photographerHeadElement = photographer.getPhotographerHead();
-
-        // Ajoute l'élément généré à votre page
-        const photographerSection = document.querySelector('.photograph-header'); // Assurez-vous que cet élément existe
-        if (photographerSection) {
-            photographerSection.appendChild(photographerHeadElement);
+        // Utilise getPhotographerHead pour ajouter les éléments DOM directement au conteneur
+        const photographerHeader = document.querySelector('.photograph-header'); // Assurez-vous que cet élément existe
+        if (photographerHeader) {
+            photographer.getPhotographerHead(photographerHeader);
         }
     } else {
         console.log("Photographe non trouvé");

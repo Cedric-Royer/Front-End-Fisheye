@@ -6,6 +6,42 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.photograph-header .infos {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+}
+
+.photograph-header h1 {
+    font-size: 64px;
+    font-weight: 400;
+    color: #D3573C;
+    margin: 0;
+}
+
+.photograph-header .location {
+    color: #901C1C;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.photograph-header .tagline {
+    color: #525252;
+    font-size: 18px;
+}
+
+.photograph-header img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    order: 3;
 }
 
 .contact_button {
@@ -19,6 +55,9 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    order: 2;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .modal {
