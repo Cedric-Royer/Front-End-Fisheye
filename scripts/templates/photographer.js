@@ -47,7 +47,7 @@ function photographerTemplate(data) {
     function getPhotographerHead(container) {
         const photographerIdPhoto = document.createElement('img');
         photographerIdPhoto.setAttribute("src", picture);
-        photographerIdPhoto.setAttribute("alt", name);
+        photographerIdPhoto.setAttribute("alt", `photo de ${name}`);
 
         const photographerInfos = document.createElement('div');
         photographerInfos.classList.add("infos");
