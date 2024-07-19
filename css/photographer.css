@@ -60,6 +60,16 @@
     margin-left: 10px;
 }
 
+.media-item img {
+    width: 200px;
+    height: 200px;
+}
+
+.media-item video {
+    width: 200px;
+    height: 200px;
+}
+
 .modal {
     border-radius: 5px;
     background-color: #DB8876;

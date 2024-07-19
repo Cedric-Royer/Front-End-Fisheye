@@ -10,7 +10,7 @@ async function getPhotographers() {
     return { photographers: data.photographers };
 }
 
-async function displayData(photographers) {
+async function displayPhotographersCards(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
 
     photographers.forEach((photographer) => {
@@ -23,7 +23,7 @@ async function displayData(photographers) {
 async function init() {
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
-    displayData(photographers);
+    displayPhotographersCards(photographers);
 }
 
 init();
