@@ -1,17 +1,19 @@
+import {getPhotographerPortraitPath, getPhotographerPagePath} from '../utils/paths.js';
+
 function photographerTemplate(data) {
     const { name, portrait, city, country, tagline, price, id } = data;
 
-    const picture = `assets/photographers/IDPhotos/${portrait}`;
-    const photographerPage = `./photographer.html?id=${id}`;
+    const photographerPortraitPath = getPhotographerPortraitPath(portrait);
+    const photographerPagePath = getPhotographerPagePath(id);
 
-    function getUserCardDOM() {
+    function getPhotographerCard() {
         const photographerCard = document.createElement('article');
 
         const photographerLink = document.createElement('a');
-        photographerLink.setAttribute("href", photographerPage);
+        photographerLink.setAttribute("href", photographerPagePath);
 
         const photographerIdPhoto = document.createElement('img');
-        photographerIdPhoto.setAttribute("src", picture);
+        photographerIdPhoto.setAttribute("src", photographerPortraitPath);
         photographerIdPhoto.setAttribute("alt", "");
 
         const photographerName = document.createElement('h2');
@@ -44,9 +46,9 @@ function photographerTemplate(data) {
         return photographerCard;
     }
 
-    function getPhotographerHead(container) {
+    function getPhotographerHeader(container) {
         const photographerIdPhoto = document.createElement('img');
-        photographerIdPhoto.setAttribute("src", picture);
+        photographerIdPhoto.setAttribute("src", photographerPortraitPath);
         photographerIdPhoto.setAttribute("alt", "");
 
         const photographerInfos = document.createElement('div');
@@ -70,5 +72,7 @@ function photographerTemplate(data) {
         container.appendChild(photographerInfos);
     }
 
-    return { name, picture, getUserCardDOM, getPhotographerHead };
+    return {getPhotographerCard, getPhotographerHeader};
 }
+
+export default photographerTemplate;

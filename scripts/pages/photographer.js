@@ -1,11 +1,16 @@
+import photographerTemplate from '../templates/photographerTemplate.js';
+import {setupModal} from '../utils/contactForm.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupModal();
+});
+
 async function getPhotographers() {
     const url = './data/photographers.json';
 
-    // Récupère les données à partir du fichier JSON
     const response = await fetch(url);
     const data = await response.json();
     
-    // Retourne les photographes récupérés
     return data.photographers;
 }
 
@@ -31,66 +36,47 @@ async function getMediaByPhotographerId(id) {
     
 }
 
-// Récupère l'ID du photographe à partir des paramètres de l'URL
 const urlParams = new URLSearchParams(window.location.search);
 const photographerId = urlParams.get('id');
 
 async function displayPhotographerHeader() {
-    // Utilisation de la fonction pour obtenir les informations du photographe
     const photographerInfo = await getPhotographerById(photographerId);
-    // Crée une instance de photographerTemplate avec les données du photographe
     const photographer = photographerTemplate(photographerInfo);
 
-    // Utilise getPhotographerHead pour ajouter les éléments DOM directement au conteneur
     const photographerHeader = document.querySelector('.photograph-header');
-    photographer.getPhotographerHead(photographerHeader);
+    photographer.getPhotographerHeader(photographerHeader);
 }
 
 displayPhotographerHeader();
 
 async function getPhotographerMedia(photographerId) {
-    try {
-        const response = await fetch('./data/photographers.json');
-        const data = await response.json();
-        // Filter media for the specific photographer
-        const mediaItems = data.media.filter(media => media.photographerId === photographerId);
-        return mediaItems;
-    } catch (error) {
-        console.error('Error fetching media:', error);
-        return []; // Return an empty array in case of error
-    }
+    const response = await fetch('./data/photographers.json');
+    const data = await response.json();
+    const mediaItems = data.media.filter(media => media.photographerId === photographerId);
+    return mediaItems;
 }
 
-async function displayMedia() {
+async function displayPhotographerMedia() {
     const urlParams = new URLSearchParams(window.location.search);
     const photographerId = parseInt(urlParams.get('id'));
 
     const mediaItems = await getPhotographerMedia(photographerId);
 
-    console.log(mediaItems); // Log the mediaItems to check its structure
-
-    if (!Array.isArray(mediaItems)) {
-        console.error('mediaItems is not an array:', mediaItems);
-        return;
-    }
-
     const mediaContainer = document.getElementById('media-container');
-    mediaContainer.innerHTML = ''; // Clear any existing content
+    mediaContainer.innerHTML = ''; 
 
     mediaItems.forEach(media => {
-        // Create a new element for each media item
         const mediaElement = document.createElement('div');
         mediaElement.className = 'media-item';
 
-        // Check if it's a jpg image or an mp4 video
         if (media.image && media.image.endsWith('.jpg')) {
             const img = document.createElement('img');
-            img.src = `./assets/photographers/Media/${media.image}`; // Adjust path to your media folder
+            img.src = `./assets/photographers/Media/${media.image}`;
             img.alt = media.title;
             mediaElement.appendChild(img);
         } else if (media.video && media.video.endsWith('.mp4')) {
             const video = document.createElement('video');
-            video.src = `./assets/photographers/Media/${media.video}`; // Adjust path to your media folder
+            video.src = `./assets/photographers/Media/${media.video}`;
             video.controls = true;
             mediaElement.appendChild(video);
         }
@@ -112,11 +98,10 @@ async function displayMedia() {
         price.textContent = `Price: $${media.price}`;
         mediaElement.appendChild(price);
 
-        // Append the media element to the container
         mediaContainer.appendChild(mediaElement);
     });
 }
 
-// Call displayMedia to initiate the process
-displayMedia();
+// Call displayPhotographerMedia to initiate the process
+displayPhotographerMedia();
 
