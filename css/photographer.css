@@ -100,8 +100,9 @@ main, header {
     align-items: center;
 }
 
-.fa-heart {
+.icon-like {
     margin-left: 5px;
+    cursor: pointer;
 }
 
 .media-item img,

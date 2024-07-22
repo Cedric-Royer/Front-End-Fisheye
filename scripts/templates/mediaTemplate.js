@@ -31,10 +31,17 @@ function mediaTemplate(data) {
         const likesText = document.createElement('span');
         likesText.textContent = `${likes}`;
         const likesIcon = document.createElement('i');
-        likesIcon.classList.add('fa-solid', 'fa-heart');
+        likesIcon.classList.add('fa-solid', 'fa-heart','icon-like');
         mediaLikes.appendChild(likesText);
         mediaLikes.appendChild(likesIcon);
         titleLikesContainer.appendChild(mediaLikes);
+
+        // Ajoute un gestionnaire de clic pour augmenter le nombre de likes
+        likesIcon.addEventListener('click', () => {
+            let currentLikes = parseInt(likesText.textContent);
+            currentLikes++;
+            likesText.textContent = `${currentLikes}`;
+        });        
 
         mediaElement.appendChild(titleLikesContainer);
 
