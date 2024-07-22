@@ -65,6 +65,98 @@ main, header {
     margin-left: 10px;
 }
 
+select {
+    background-color: #901C1C;
+    color: #FFFFFF;
+    border-radius: 5px;
+    font-family: DM Sans;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: left;
+    width: 170px;
+    height: 69px;
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+/* Style pour le bouton du menu déroulant */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 100px;
+    margin-top: 50px;
+    font-family: DM Sans;
+}
+
+.dropbtn {
+    background-color: #901C1C;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px;
+    font-size: 18px; /* Taille de la police */
+    font-weight: 700; /* Poids de la police */
+    cursor: pointer;
+    border-radius: 5px;
+    width: 170px; /* Largeur du bouton */
+    height: 69px; /* Hauteur du bouton */
+}
+
+/* Style pour le contenu du menu déroulant */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #901C1C;
+    min-width: 170px; /* Correspond à la largeur du bouton */
+    z-index: 1;
+    border-radius: 5px;
+    font-family: DM Sans; /* Assurez-vous que la police est cohérente */
+    font-size: 18px; /* Taille de la police pour le menu */
+}
+
+/* Style pour les liens du menu déroulant */
+.dropdown-content a {
+    color: #FFFFFF;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 18px; /* Taille de la police */
+    font-weight: 700; /* Poids de la police */
+}
+
+/* Style pour les séparateurs */
+.dropdown-content .separator {
+    margin: 0;
+    border-top: 1px solid #C0C0C0;
+    color: #C0C0C0;
+    text-align: center;
+}
+
+.dropbtn .fa-chevron-down {
+    margin-left: auto; /* Pousse l'icône vers la droite */
+}
+
+.dropbtn .fa-chevron-up {
+    margin-left: auto; /* Pousse l'icône vers la droite */
+}
+
+.dropbtn .hidden {
+    display: none;
+}
+
+/* Afficher le menu déroulant lorsque la classe 'show' est ajoutée */
+.show {
+    display: block;
+}
+
+.dropdown .fa-chevron-down,
+.dropdown .fa-chevron-up {
+    font-size: 18px;
+}
+
+.dropdown-content a:hover {
+    background-color: #B74242; /* Couleur de survol pour les liens */
+}
+
 .media-container {
     display: flex;
     flex-wrap: wrap;

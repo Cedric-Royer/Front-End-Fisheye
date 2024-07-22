@@ -1,5 +1,5 @@
 function mediaTemplate(data) {
-    const { title, image, video, likes } = data;
+    const { title, image, video, likes, date } = data;
 
     function getMediaElement() {
         const mediaElement = document.createElement('div');
@@ -9,6 +9,7 @@ function mediaTemplate(data) {
             const img = document.createElement('img');
             img.src = `./assets/photographers/Media/${image}`;
             img.alt = title;
+            img.loading = 'lazy';
             mediaElement.appendChild(img);
         } else if (video) {
             const videoElement = document.createElement('video');

@@ -13,10 +13,27 @@
           <a href="./index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye home page"/></a>
       </header>
       <main id="main">
-          <div class="photograph-header">
-              <button class="contact_button open">Contactez-moi</button>
+        <div class="photograph-header">
+            <button class="contact_button open">Contactez-moi</button>
+        </div>
+
+        <div class="dropdown">
+          Tri par: 
+          <button class="dropbtn">
+            <span id="selected-option">Popularité</span>
+            <i class="fa-solid fa-chevron-down"></i>
+            <i class="fa-solid fa-chevron-up hidden"></i>
+        </button>
+          <div class="dropdown-content">
+              <a href="#" data-value="popularity">Popularité</a>
+              <hr class="separator">
+              <a href="#" data-value="date">Date</a>
+              <hr class="separator">
+              <a href="#" data-value="title">Titre</a>
           </div>
-          <div id="media-container" class="media-container"></div>
+        </div>
+      
+        <div id="media-container" class="media-container"></div>
       </main>
       <div id="contact_modal" class="modal-container">
           <div class="modal">
