@@ -1,41 +1,47 @@
 function mediaTemplate(data) {
-    const { id, photographerId, title, image, likes, date, price } = data;
+    const { title, image, video, likes } = data;
 
-    function getPhotographerMedia() {
-        // Create the media element
+    function getMediaElement() {
         const mediaElement = document.createElement('div');
-        mediaElement.classList.add('media-element');
+        mediaElement.classList.add('media-item');
 
-        // Add image or video element
-        //const mediaContent = document.createElement('img'); // Assuming it's an image, adjust if it could be a video
-        //mediaContent.setAttribute('src', `assets/media/${image}`);
-        //mediaContent.setAttribute('alt', title);
-        //mediaElement.appendChild(mediaContent);
+        if (image) {
+            const img = document.createElement('img');
+            img.src = `./assets/photographers/Media/${image}`;
+            img.alt = title;
+            mediaElement.appendChild(img);
+        } else if (video) {
+            const videoElement = document.createElement('video');
+            videoElement.src = `./assets/photographers/Media/${video}`;
+            videoElement.controls = true;
+            mediaElement.appendChild(videoElement);
+        }
 
-        // Add title
+        // Conteneur pour le titre et les likes
+        const titleLikesContainer = document.createElement('div');
+        titleLikesContainer.classList.add('title-likes-container');
+
+        // Ajout du titre
         const mediaTitle = document.createElement('h3');
         mediaTitle.textContent = title;
-        mediaElement.appendChild(mediaTitle);
+        titleLikesContainer.appendChild(mediaTitle);
 
-        // Add likes
-        const mediaLikes = document.createElement('span');
-        mediaLikes.textContent = likes;
-        mediaElement.appendChild(mediaLikes);
+        // Ajout des likes avec l'icône de cœur
+        const mediaLikes = document.createElement('p');
+        const likesText = document.createElement('span');
+        likesText.textContent = `${likes}`;
+        const likesIcon = document.createElement('i');
+        likesIcon.classList.add('fa-solid', 'fa-heart');
+        mediaLikes.appendChild(likesText);
+        mediaLikes.appendChild(likesIcon);
+        titleLikesContainer.appendChild(mediaLikes);
 
-        // Add date
-        const mediaDate = document.createElement('span');
-        mediaDate.textContent = date;
-        mediaElement.appendChild(mediaDate);
-
-        // Add price
-        const mediaPrice = document.createElement('span');
-        mediaPrice.textContent = `${price}€`;
-        mediaElement.appendChild(mediaPrice);
+        mediaElement.appendChild(titleLikesContainer);
 
         return mediaElement;
     }
 
-    return { getPhotographerMedia };
+    return { getMediaElement };
 }
 
 export default mediaTemplate;
