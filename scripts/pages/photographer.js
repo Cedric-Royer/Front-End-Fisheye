@@ -11,27 +11,30 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeDropdown();
 });
 
-async function getPhotographers() {
+async function getData() {
     const url = './data/photographers.json';
     const response = await fetch(url);
     const data = await response.json();
-    return data.photographers;
+    
+    return {
+        photographers: data.photographers,
+        media: data.media
+    };
 }
 
-async function getMedia() {
-    const url = './data/photographers.json';
-    const response = await fetch(url);
-    const data = await response.json();
-    return data.media;
+function getPhotographerIdFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
 }
+
 
 async function getPhotographerById(id) {
-    const photographers = await getPhotographers();
+    const { photographers } = await getData();
     return photographers.find(photographer => photographer.id === parseInt(id));
 }
 
 async function getMediaByPhotographerId(id) {
-    const media = await getMedia();
+    const { media } = await getData();
     return media.filter(mediaItem => mediaItem.photographerId === parseInt(id));
 }
 
@@ -76,17 +79,23 @@ function sortMedia(mediaItems, sortOption) {
     });
 }
 
-function getPhotographerIdFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('id');
-}
-
 function initializeDropdown() {
     const dropdownButton = document.querySelector('.dropbtn');
+    const selectedOption = document.querySelector('#selected-option');
     const dropdownContent = document.querySelector('.dropdown-content');
     const chevronDown = dropdownButton.querySelector('.fa-chevron-down');
     const chevronUp = dropdownButton.querySelector('.fa-chevron-up');
     const dropdownLinks = document.querySelectorAll('.dropdown-content a');
+
+    const updateDropdownOptions = (selectedText) => {
+        dropdownLinks.forEach(link => {
+            if (link.textContent === selectedText) {
+                link.classList.add('hidden-option');
+            } else {
+                link.classList.remove('hidden-option');
+            }
+        });
+    };
 
     // Ajouter un événement au bouton du menu déroulant pour afficher/masquer les options
     dropdownButton.addEventListener('click', () => {
@@ -94,6 +103,11 @@ function initializeDropdown() {
         dropdownContent.classList.toggle('show');
         chevronDown.classList.toggle('hidden', !isOpen);
         chevronUp.classList.toggle('hidden', isOpen);
+        dropdownButton.classList.add('hidden-option');
+        
+        // Mettre à jour les options du menu déroulant
+        const selectedText = selectedOption.textContent;
+        updateDropdownOptions(selectedText);
     });
 
     // Ajouter un événement pour chaque option du menu déroulant
@@ -101,20 +115,13 @@ function initializeDropdown() {
         link.addEventListener('click', async (event) => {
             event.preventDefault();
             const sortBy = event.target.getAttribute('data-value');
-            dropdownButton.querySelector('#selected-option').textContent = event.target.textContent; // Met à jour le texte du bouton
             await displayPhotographerMedia(sortBy); // Réaffiche les médias en fonction du tri sélectionné
             dropdownContent.classList.remove('show');
             chevronDown.classList.remove('hidden');
             chevronUp.classList.add('hidden');
+            dropdownButton.classList.remove('hidden-option');
         });
     });
 
-    // Cacher le menu si l'utilisateur clique en dehors
-    document.addEventListener('click', (event) => {
-        if (!event.target.matches('.dropbtn') && !event.target.matches('.dropdown-content a')) {
-            dropdownContent.classList.remove('show');
-            chevronDown.classList.remove('hidden');
-            chevronUp.classList.add('hidden');
-        }
-    });
+
 }

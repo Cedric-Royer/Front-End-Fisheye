@@ -4,7 +4,7 @@
       <link href="css/style.css" rel="stylesheet" type="text/css" />
       <meta charset="utf-8">
       <link rel="icon" type="image/png" href="assets/favicon.png">
-      <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <title>Fisheye - photographe </title>
   </head>
@@ -18,20 +18,23 @@
         </div>
 
         <div class="dropdown">
-          Tri par: 
-          <button class="dropbtn">
-            <span id="selected-option">Popularité</span>
-            <i class="fa-solid fa-chevron-down"></i>
-            <i class="fa-solid fa-chevron-up hidden"></i>
-        </button>
-          <div class="dropdown-content">
-              <a href="#" data-value="popularity">Popularité</a>
-              <hr class="separator">
-              <a href="#" data-value="date">Date</a>
-              <hr class="separator">
-              <a href="#" data-value="title">Titre</a>
-          </div>
-        </div>
+            <span class="sort-text">Trier par:</span>
+            <button class="dropbtn">
+                <span id="selected-option" class="selected-option">Popularité</span>
+                <i class="fa-solid fa-chevron-down"></i>
+                <i class="fa-solid fa-chevron-up hidden"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#" data-value="popularity">
+                    <span>Popularité</span>
+                    <i class="fa-solid fa-chevron-up"></i>
+                </a>
+                <hr class="separator">
+                <a href="#" data-value="date">Date</a>
+                <hr class="separator">
+                <a href="#" data-value="title">Titre</a>
+            </div>
+        </div>     
       
         <div id="media-container" class="media-container"></div>
       </main>
@@ -41,18 +44,18 @@
                   <h2>Contactez-moi</h2>
                   <img src="assets/icons/close.svg" class="close" alt="Close Modal"/>
               </header>
-              <form>
+              <form id="contact" method="get" action="">
                   <div>
-                      <label>Prénom</label>
-                      <input />
-                      <label>Nom</label>
-                      <input />
-                      <label>Email</label>
-                      <input />
-                      <label>Votre Message</label>
-                      <input />
+                      <label for="first">Prénom</label>
+                      <input type="text" id="first"/>
+                      <label for="last">Nom</label>
+                      <input type="text" id="last"/>
+                      <label for="email">Email</label>
+                      <input type="email" id="email" autocomplete="on"/>
+                      <label for="message">Votre Message</label>
+                      <input type="text" id="message"/>
                   </div>
-                  <button class="contact_button">Envoyer</button>
+                  <button type="submit" class="contact_button">Envoyer</button>
               </form>
           </div>
       </div>
