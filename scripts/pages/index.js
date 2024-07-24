@@ -1,7 +1,6 @@
 import photographerTemplate from '../templates/photographerTemplate.js';
 
 async function getPhotographers() {
-
     const url = './data/photographers.json';
     const response = await fetch(url);
     const data = await response.json();

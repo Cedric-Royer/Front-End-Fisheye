@@ -3,12 +3,11 @@ import mediaTemplate from '../templates/mediaTemplate.js';
 import { setupModal } from '../utils/contactForm.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    setupModal();
     displayPhotographerHeader();
     displayPhotographerMedia();
-
-    // Ajouter des écouteurs d'événements pour le menu déroulant
-    initializeDropdown();
+    displayPhotographerDetails()
+    setupDropdown();
+    setupModal();
 });
 
 async function getData() {
@@ -26,7 +25,6 @@ function getPhotographerIdFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('id');
 }
-
 
 async function getPhotographerById(id) {
     const { photographers } = await getData();
@@ -51,11 +49,10 @@ async function displayPhotographerMedia(sortBy = 'popularity') {
     const photographerId = getPhotographerIdFromURL();
     const mediaItems = await getMediaByPhotographerId(photographerId);
     
-    // Trier les médias en fonction de l'option sélectionnée
     const sortedMediaItems = sortMedia(mediaItems, sortBy);
 
     const mediaContainer = document.getElementById('media-container');
-    mediaContainer.innerHTML = ''; // Clear existing content
+    mediaContainer.innerHTML = ''; 
 
     sortedMediaItems.forEach(media => {
         const mediaModel = mediaTemplate(media);
@@ -64,64 +61,135 @@ async function displayPhotographerMedia(sortBy = 'popularity') {
     });
 }
 
+async function displayPhotographerDetails() {
+    const photographerId = getPhotographerIdFromURL();
+    const photographerInfo = await getPhotographerById(photographerId);
+    const mediaItems = await getMediaByPhotographerId(photographerId);
+
+    const totalLikes = mediaItems.reduce((sum, media) => sum + media.likes, 0);
+
+    const photographerDetails = document.createElement('p');
+    photographerDetails.classList.add('photographer-details');
+    const photographerLikes = document.createElement('div');
+    const totalLikesElement = document.createElement('span');
+    totalLikesElement.textContent = totalLikes;
+    const likesIcon = document.createElement('i');
+    likesIcon.classList.add('fa-solid', 'fa-heart','icon-like');
+    likesIcon.setAttribute("aria-label", "j'aime");
+    photographerLikes.appendChild(totalLikesElement);
+    photographerLikes.appendChild(likesIcon);
+    photographerDetails.appendChild(photographerLikes);
+
+    const photographerPriceElement = document.createElement('span');
+    photographerPriceElement.textContent = `${photographerInfo.price}€ / jour`;
+    photographerDetails.appendChild(photographerPriceElement);
+
+    const mediaContainer = document.getElementById('media-container');
+    mediaContainer.appendChild(photographerDetails);
+}
+
 function sortMedia(mediaItems, sortOption) {
     return [...mediaItems].sort((a, b) => {
         switch (sortOption) {
             case 'popularity':
-                return b.likes - a.likes; // Trier par nombre de likes (popularité)
+                return b.likes - a.likes;
             case 'date':
-                return new Date(b.date) - new Date(a.date); // Trier par date (plus récente en premier)
+                return new Date(b.date) - new Date(a.date);
             case 'title':
-                return a.title.localeCompare(b.title); // Trier par titre (ordre alphabétique)
+                return a.title.localeCompare(b.title);
             default:
-                return 0; // Aucun tri par défaut
+                return 0;
         }
     });
 }
 
-function initializeDropdown() {
+function setupDropdown() {
     const dropdownButton = document.querySelector('.dropbtn');
     const selectedOption = document.querySelector('#selected-option');
     const dropdownContent = document.querySelector('.dropdown-content');
     const chevronDown = dropdownButton.querySelector('.fa-chevron-down');
     const chevronUp = dropdownButton.querySelector('.fa-chevron-up');
     const dropdownLinks = document.querySelectorAll('.dropdown-content a');
+    let focusedIndex = 0;
 
-    const updateDropdownOptions = (selectedText) => {
-        dropdownLinks.forEach(link => {
-            if (link.textContent === selectedText) {
-                link.classList.add('hidden-option');
-            } else {
-                link.classList.remove('hidden-option');
-            }
-        });
-    };
-
-    // Ajouter un événement au bouton du menu déroulant pour afficher/masquer les options
     dropdownButton.addEventListener('click', () => {
         const isOpen = dropdownContent.classList.contains('show');
         dropdownContent.classList.toggle('show');
         chevronDown.classList.toggle('hidden', !isOpen);
         chevronUp.classList.toggle('hidden', isOpen);
         dropdownButton.classList.add('hidden-option');
-        
-        // Mettre à jour les options du menu déroulant
-        const selectedText = selectedOption.textContent;
-        updateDropdownOptions(selectedText);
     });
 
-    // Ajouter un événement pour chaque option du menu déroulant
-    dropdownLinks.forEach(link => {
+    dropdownLinks.forEach((link) => {
         link.addEventListener('click', async (event) => {
             event.preventDefault();
-            const sortBy = event.target.getAttribute('data-value');
-            await displayPhotographerMedia(sortBy); // Réaffiche les médias en fonction du tri sélectionné
+            const sortBy = link.getAttribute('data-value');
+
+            switch (sortBy) {
+                case 'popularity':
+                    selectedOption.textContent = 'Popularité';
+                    break;
+                case 'date':
+                    selectedOption.textContent = 'Date';
+                    break;
+                case 'title':
+                    selectedOption.textContent = 'Titre';
+                    break;
+                default:
+                    selectedOption.textContent = 'Popularité';
+            }
+
+            await displayPhotographerMedia(sortBy);
             dropdownContent.classList.remove('show');
-            chevronDown.classList.remove('hidden');
-            chevronUp.classList.add('hidden');
             dropdownButton.classList.remove('hidden-option');
+        });
+
+        link.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowDown':
+                    event.preventDefault();
+                    focusedIndex = (focusedIndex + 1) % dropdownLinks.length;
+                    updateFocus();
+                    break;
+                case 'ArrowUp':
+                    event.preventDefault();
+                    focusedIndex = (focusedIndex - 1 + dropdownLinks.length) % dropdownLinks.length;
+                    updateFocus();
+                    break;
+                case 'Enter':
+                    event.preventDefault();
+                    dropdownLinks[focusedIndex].click();
+                    break;
+            }
         });
     });
 
+    function updateFocus() {
+        dropdownLinks.forEach((link, index) => {
+            if (index === focusedIndex) {
+                link.focus();
+                link.setAttribute('aria-selected', 'true');
+            } else {
+                link.setAttribute('aria-selected', 'false');
+            }
+        });
+    }
 
+    function handleDropdownKeyboard(event) {
+        switch (event.key) {
+            case 'ArrowDown':
+                event.preventDefault();
+                focusedIndex = 0;
+                dropdownLinks[focusedIndex].focus();
+                break;
+            case 'ArrowUp':
+                event.preventDefault();
+                focusedIndex = dropdownLinks.length - 1;
+                dropdownLinks[focusedIndex].focus();
+                break;
+        }
+    }
+    
+    dropdownButton.addEventListener('keydown', handleDropdownKeyboard);
+    
 }

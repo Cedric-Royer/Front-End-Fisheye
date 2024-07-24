@@ -1,6 +1,6 @@
 @import url("./utils/dropDown.css");
 
-main, header { 
+main, .top-banner { 
     max-width: 1440px;
     margin: 0 auto;
 }
@@ -29,6 +29,7 @@ main, header {
     display: flex;
     flex-direction: column;
     order: 1;
+    margin: 0;
 }
 
 .photograph-header h1 {
@@ -72,6 +73,23 @@ main, header {
     margin-left: 10px;
 }
 
+.photographer-details {
+    width: 376px;
+    height: 59px;
+    border-radius: 5px;
+    background: #DB8876;
+    position: fixed;
+    bottom: -20px;
+    right: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing:border-box;
+    font-family: DM Sans;
+    font-size: 16px;
+    font-weight: 600;
+}
+
 .media-container {
     display: flex;
     flex-wrap: wrap;
@@ -95,6 +113,7 @@ main, header {
     align-items: center;
     width: 100%;
     padding: 10px;
+    font-weight: 600;
 }
 
 .title-likes-container h3 {

@@ -49,27 +49,31 @@ function photographerTemplate(data) {
     function getPhotographerHeader(container) {
         const photographerIdPhoto = document.createElement('img');
         photographerIdPhoto.setAttribute("src", photographerPortraitPath);
-        photographerIdPhoto.setAttribute("alt", "");
-
-        const photographerInfos = document.createElement('div');
+        photographerIdPhoto.setAttribute("alt", `Portrait de ${name}`);
+    
+        const photographerInfos = document.createElement('header');
         photographerInfos.classList.add("infos");
-
+    
         const photographerName = document.createElement('h1');
         photographerName.textContent = name;
-
+    
         const photographerLocation = document.createElement('span');
         photographerLocation.textContent = `${city}, ${country}`;
         photographerLocation.classList.add("location");
-
+    
         const photographerTagline = document.createElement('span');
         photographerTagline.textContent = tagline;
         photographerTagline.classList.add("tagline");
-
-        container.appendChild(photographerIdPhoto);
+    
         photographerInfos.appendChild(photographerName);
         photographerInfos.appendChild(photographerLocation);
         photographerInfos.appendChild(photographerTagline);
-        container.appendChild(photographerInfos);
+        
+        container.appendChild(photographerIdPhoto);
+        
+        const contactButton = container.querySelector('.contact_button');
+        
+        container.insertBefore(photographerInfos, contactButton);
     }
 
     return {getPhotographerCard, getPhotographerHeader};

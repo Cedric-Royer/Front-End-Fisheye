@@ -9,34 +9,49 @@
       <title>Fisheye - photographe </title>
   </head>
   <body>
-      <header>
-          <a href="./index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye home page"/></a>
+      <header class="top-banner">
+          <a href="./index.html"><img src="assets/images/logo.png" class="logo" alt="Page d'accueil Fisheye"/></a>
       </header>
       <main id="main">
-        <div class="photograph-header">
+        <section class="photograph-header">
             <button class="contact_button open">Contactez-moi</button>
-        </div>
+        </section>
 
         <div class="dropdown">
-            <span class="sort-text">Trier par:</span>
-            <button class="dropbtn">
+            <span class="sort-text" id="sort-label">Trier par:</span>
+            <button class="dropbtn" 
+                    role="button" 
+                    aria-haspopup="menu" 
+                    aria-expanded="false" 
+                    aria-label="Ouvre une liste d'options de tri" 
+                    aria-controls="dropdown-list">
                 <span id="selected-option" class="selected-option">Popularité</span>
                 <i class="fa-solid fa-chevron-down"></i>
                 <i class="fa-solid fa-chevron-up hidden"></i>
             </button>
-            <div class="dropdown-content">
-                <a href="#" data-value="popularity">
-                    <span>Popularité</span>
+            <div id="dropdown-list" class="dropdown-content" 
+                 role="menu" 
+                 aria-labelledby="sort-label">
+                <a href="#" data-value="popularity" role="menuitem" aria-selected="true">
+                    Popularité
                     <i class="fa-solid fa-chevron-up"></i>
                 </a>
-                <hr class="separator">
-                <a href="#" data-value="date">Date</a>
-                <hr class="separator">
-                <a href="#" data-value="title">Titre</a>
+                <hr class="separator" aria-hidden="true">
+                <a href="#" data-value="date" role="menuitem" aria-selected="false">
+                    Date
+                </a>
+                <hr class="separator" aria-hidden="true">
+                <a href="#" data-value="title" role="menuitem" aria-selected="false">
+                    Titre
+                </a>
             </div>
-        </div>     
-      
-        <div id="media-container" class="media-container"></div>
+        </div>
+        
+        
+
+        <div id="media-container" class="media-container">
+            <div class="photographer-details"></div>
+        </div>
       </main>
       <div id="contact_modal" class="modal-container">
           <div class="modal">

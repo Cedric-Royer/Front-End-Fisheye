@@ -5,7 +5,7 @@ body {
     margin: 0;
 }
 
-header {
+.top-banner {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
