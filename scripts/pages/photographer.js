@@ -5,7 +5,7 @@ import { setupModal } from '../utils/contactForm.js';
 document.addEventListener('DOMContentLoaded', () => {
     displayPhotographerHeader();
     displayPhotographerMedia();
-    displayPhotographerDetails()
+    displayPhotographerDetails();
     setupDropdown();
     setupModal();
 });
@@ -84,7 +84,7 @@ async function displayPhotographerDetails() {
     photographerPriceElement.textContent = `${photographerInfo.price}€ / jour`;
     photographerDetails.appendChild(photographerPriceElement);
 
-    const mediaContainer = document.getElementById('media-container');
+    const mediaContainer = document.getElementById('main');
     mediaContainer.appendChild(photographerDetails);
 }
 
