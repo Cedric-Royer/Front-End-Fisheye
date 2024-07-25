@@ -79,7 +79,6 @@ async function displayPhotographerDetails() {
     totalLikesElement.textContent = totalLikes;
     const likesIcon = document.createElement('i');
     likesIcon.classList.add('fa-solid', 'fa-heart','icon-like');
-    likesIcon.setAttribute("aria-label", "j'aime");
     photographerLikes.appendChild(totalLikesElement);
     photographerLikes.appendChild(likesIcon);
     photographerDetails.appendChild(photographerLikes);
@@ -180,11 +179,8 @@ function setupDropdown() {
     function updateFocus() {
         dropdownLinks.forEach((link, index) => {
             if (index === focusedIndex) {
-                link.focus();
-                link.setAttribute('aria-selected', 'true');
-            } else {
-                link.setAttribute('aria-selected', 'false');
-            }
+                link.focus();;
+            } 
         });
     }
 
