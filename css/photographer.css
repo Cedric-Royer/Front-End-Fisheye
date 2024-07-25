@@ -1,4 +1,5 @@
 @import url("./utils/dropDown.css");
+@import url("./utils/carrousel.css");
 
 main, .top-banner { 
     max-width: 1440px;
