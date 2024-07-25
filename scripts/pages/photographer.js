@@ -123,6 +123,13 @@ function setupDropdown() {
         chevronDown.classList.toggle('hidden', !isOpen);
         chevronUp.classList.toggle('hidden', isOpen);
         dropdownButton.classList.add('hidden-option');
+
+        if (!isOpen) {
+            focusedIndex = 0;
+            dropdownLinks[focusedIndex].focus();
+        } else {
+            dropdownButton.focus();
+        }
     });
 
     dropdownLinks.forEach((link) => {
@@ -147,6 +154,7 @@ function setupDropdown() {
             await displayPhotographerMedia(sortBy);
             dropdownContent.classList.remove('show');
             dropdownButton.classList.remove('hidden-option');
+            dropdownButton.focus();
         });
 
         link.addEventListener('keydown', (event) => {
@@ -181,20 +189,35 @@ function setupDropdown() {
     }
 
     function handleDropdownKeyboard(event) {
-        switch (event.key) {
-            case 'ArrowDown':
-                event.preventDefault();
-                focusedIndex = 0;
-                dropdownLinks[focusedIndex].focus();
-                break;
-            case 'ArrowUp':
-                event.preventDefault();
-                focusedIndex = dropdownLinks.length - 1;
-                dropdownLinks[focusedIndex].focus();
-                break;
+        if (dropdownContent.classList.contains('show')) {
+            switch (event.key) {
+                case 'ArrowDown':
+                    event.preventDefault();
+                    focusedIndex = 0;
+                    dropdownLinks[focusedIndex].focus();
+                    break;
+                case 'ArrowUp':
+                    event.preventDefault();
+                    focusedIndex = dropdownLinks.length - 1;
+                    dropdownLinks[focusedIndex].focus();
+                    break;
+                case 'Escape':
+                    dropdownContent.classList.remove('show');
+                    dropdownButton.classList.remove('hidden-option');
+                    dropdownButton.focus();
+                    break;
+            }
+        } else if (event.key === 'Enter') {
+            event.preventDefault();
+            dropdownContent.classList.toggle('show');
+            chevronDown.classList.toggle('hidden');
+            chevronUp.classList.toggle('hidden');
+            dropdownButton.classList.add('hidden-option');
+            focusedIndex = 0;
+            setTimeout(() => dropdownLinks[focusedIndex].focus(), 100);
         }
     }
-    
+
     dropdownButton.addEventListener('keydown', handleDropdownKeyboard);
-    
 }
+
