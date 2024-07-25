@@ -4,6 +4,7 @@ export function setupCarousel() {
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
     const mediaContainer = document.querySelector('.carousel-media');
+    const body = document.querySelector('body'); 
 
     let currentIndex = 0;
 
@@ -11,10 +12,12 @@ export function setupCarousel() {
         currentIndex = index;
         modal.style.display = 'block';
         displayMedia(currentIndex);
+        body.classList.add('modal-open'); 
     }
 
     function closeCarousel() {
         modal.style.display = 'none';
+        body.classList.remove('modal-open'); 
     }
 
     function displayMedia(index) {
