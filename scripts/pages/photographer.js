@@ -214,7 +214,7 @@ function setupDropdown() {
             chevronUp.classList.toggle('hidden');
             dropdownButton.classList.add('hidden-option');
             focusedIndex = 0;
-            setTimeout(() => dropdownLinks[focusedIndex].focus(), 100);
+            dropdownLinks[focusedIndex].focus();
         }
     }
 
