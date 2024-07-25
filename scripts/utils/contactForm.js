@@ -1,4 +1,4 @@
-export function setupModal() {
+export function setupContactForm() {
     const openButton = document.querySelector(".contact_button");
     const closeButton = document.querySelector("#contact_modal .close");
     const modal = document.getElementById("contact_modal");
