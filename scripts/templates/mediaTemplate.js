@@ -28,7 +28,7 @@ function mediaTemplate(data) {
         const titleLikesContainer = document.createElement('div');
         titleLikesContainer.classList.add('title-likes-container');
 
-        const mediaTitle = document.createElement('h3');
+        const mediaTitle = document.createElement('h2');
         mediaTitle.textContent = title;
         titleLikesContainer.appendChild(mediaTitle);
 
