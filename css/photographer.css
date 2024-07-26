@@ -1,4 +1,5 @@
 @import url("./utils/dropDown.css");
+@import url("./utils/contactForm.css");
 @import url("./utils/carrousel.css");
 
 main, .top-banner { 
@@ -6,13 +7,8 @@ main, .top-banner {
     margin: 0 auto;
 }
 
-#contact_modal {
-    display: none;
-    position: absolute;
-    top: 10vh;
-    width: 80vw;
-    margin: 0px auto;
-    left: 10vw;
+.reduce-opacity {
+    opacity: 0.5;
 }
 
 .photograph-header {
@@ -38,6 +34,11 @@ main, .top-banner {
     font-weight: 400;
     color: #D3573C;
     margin: 0;
+}
+
+h2 {
+    margin: 0;
+    font-size: 1.17em;
 }
 
 .photograph-header .location {
@@ -80,7 +81,7 @@ main, .top-banner {
     border-radius: 5px;
     background: #DB8876;
     position: fixed;
-    bottom: -20px;
+    bottom: 0;
     right: 50px;
     display: flex;
     justify-content: space-between;
@@ -142,70 +143,4 @@ main, .top-banner {
     object-fit: cover;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
-}
-
-.modal header {
-    justify-content: space-between;
-    width: 100%;
-}
-
-.modal header img {
-    cursor: pointer;
-}
-
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
-
-h2 {
-    margin: 0;
-    font-size: 1.17em;
-}
-
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-form label {
-    color: #312E2E;
-    font-size: 36px;
-}
-
-form input {
-    font-size: 36px;
-    color: rgba(0, 0, 0, 0.3);
-    padding-left: 20px
-}
-
-
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
-}
-
-form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
 }

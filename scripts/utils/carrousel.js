@@ -1,3 +1,5 @@
+import {getMediaImagePath, getMediaVideoPath} from '../utils/paths.js';
+
 export function setupCarousel() {
     const modal = document.getElementById('carousel-modal');
     const closeBtn = document.querySelector('.close-carousel');
@@ -27,10 +29,10 @@ export function setupCarousel() {
 
         if (media.image) {
             mediaElement = document.createElement('img');
-            mediaElement.src = `./assets/photographers/Media/${media.image}`;
+            mediaElement.src = getMediaImagePath(media.image);
         } else if (media.video) {
             mediaElement = document.createElement('video');
-            mediaElement.src = `./assets/photographers/Media/${media.video}`;
+            mediaElement.src = getMediaVideoPath(media.video);
             mediaElement.controls = true;
         }
 

@@ -1,4 +1,4 @@
-import {getMediaImagePath, getMediaVideoPath} from '../utils/paths.js';
+import { getMediaImagePath, getMediaVideoPath } from '../utils/paths.js';
 
 function mediaTemplate(data) {
     const { title, image, video, likes } = data;
@@ -11,18 +11,35 @@ function mediaTemplate(data) {
         mediaElement.classList.add('media-item');
 
         if (image) {
+            const link = document.createElement('a');
+            link.href = '#';
+            link.setAttribute("arial-label", `${title} voir en plus grand`);
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                window.openCarousel(index);
+            });
+
             const img = document.createElement('img');
             img.src = mediaImagePath;
             img.alt = title;
             img.loading = 'lazy';
-            img.addEventListener('click', () => window.openCarousel(index)); 
-            mediaElement.appendChild(img);
+
+            link.appendChild(img);
+            mediaElement.appendChild(link);
         } else if (video) {
+            const link = document.createElement('a');
+            link.href = '#';
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                window.openCarousel(index);
+            });
+
             const videoElement = document.createElement('video');
             videoElement.src = mediaVideoPath;
             videoElement.controls = false;
-            videoElement.addEventListener('click', () => window.openCarousel(index));
-            mediaElement.appendChild(videoElement);
+
+            link.appendChild(videoElement);
+            mediaElement.appendChild(link);
         }
 
         const titleLikesContainer = document.createElement('div');
@@ -30,6 +47,7 @@ function mediaTemplate(data) {
 
         const mediaTitle = document.createElement('h2');
         mediaTitle.textContent = title;
+        mediaTitle.setAttribute("lang", "en");
         titleLikesContainer.appendChild(mediaTitle);
 
         const mediaLikes = document.createElement('p');
@@ -44,7 +62,6 @@ function mediaTemplate(data) {
         titleLikesContainer.appendChild(mediaLikes);
 
         likesIcon.addEventListener('click', (event) => {
-            event.stopPropagation(); // Empêche l'ouverture du carrousel lors du clic sur l'icône de coeur
             let currentLikes = parseInt(likesText.textContent);
             currentLikes++;
             likesText.textContent = `${currentLikes}`;

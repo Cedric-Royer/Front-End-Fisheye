@@ -13,4 +13,3 @@ export function getMediaImagePath(image) {
 export function getMediaVideoPath(video) {
     return `./assets/photographers/Media/${video}`;
 }
-

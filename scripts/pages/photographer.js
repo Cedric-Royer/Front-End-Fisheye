@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     displayPhotographerHeader();
     displayPhotographerMedia();
     displayPhotographerDetails();
+    displayPhotographerNameInFormContact();
     setupDropdown();
     setupContactForm();
+    setFormActionWithPhotographerId();
     setupCarousel(); 
 });
 
@@ -36,6 +38,14 @@ async function getPhotographerById(id) {
 async function getMediaByPhotographerId(id) {
     const { media } = await getData();
     return media.filter(mediaItem => mediaItem.photographerId === parseInt(id));
+}
+
+async function displayPhotographerNameInFormContact() {
+    const photographerId = getPhotographerIdFromURL();
+    const photographerInfo = await getPhotographerById(photographerId);
+    
+    const formTitle = document.getElementById('contact-head-text');
+    formTitle.textContent = `Contactez-moi ${photographerInfo.name}`;
 }
 
 async function displayPhotographerHeader() {
@@ -72,7 +82,7 @@ async function displayPhotographerDetails() {
 
     const totalLikes = mediaItems.reduce((sum, media) => sum + media.likes, 0);
 
-    const photographerDetails = document.createElement('p');
+    const photographerDetails = document.createElement('div');
     photographerDetails.classList.add('photographer-details');
     const photographerLikes = document.createElement('div');
     const totalLikesElement = document.createElement('span');
@@ -89,6 +99,14 @@ async function displayPhotographerDetails() {
 
     const mediaContainer = document.getElementById('main');
     mediaContainer.appendChild(photographerDetails);
+}
+
+async function setFormActionWithPhotographerId() {
+    const photographerId = getPhotographerIdFromURL();
+    const hiddenInput = document.getElementById('photographer-id');
+    if (hiddenInput) {
+        hiddenInput.value = photographerId;
+    }
 }
 
 
@@ -216,4 +234,3 @@ function setupDropdown() {
 
     dropdownButton.addEventListener('keydown', handleDropdownKeyboard);
 }
-

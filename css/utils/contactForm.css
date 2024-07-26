@@ -1,0 +1,89 @@
+.bg-modal {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#contact_modal {
+    display: none;
+    position: absolute;
+    top: 5vh;
+    width: 80vw;
+    margin: 0px auto;
+    left: 10vw;
+}
+
+.modal {
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+    z-index: 4;
+}
+
+.modal header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal header img {
+    cursor: pointer;
+}
+
+.modal header h2 {
+    font-size: 64px;
+    font-weight: normal;
+    text-align: center;
+}
+
+
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form label {
+    color: #312E2E;
+    font-size: 36px;
+}
+
+form input, form textarea {
+    font-size: 36px;
+    color: rgba(0, 0, 0, 0.3);
+    padding-left: 20px;
+    overflow:scroll;
+}
+
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 26px;
+}
+
+form input, form textarea {
+    width: 90%;
+    height: 68px;
+    border: none;
+    border-radius: 5px;
+}
+
+form #message {
+    height: 130px;
+    overflow:hidden;
+    resize: none;
+}

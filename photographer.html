@@ -55,31 +55,35 @@
         <div id="media-container" class="media-container">
         </div>
 
+        <div class="bg-modal"></div>
+
       </main>
 
       <div id="contact_modal" class="modal-container" role="dialog" aria-labelledby="contact-head-text">
           <div class="modal">
               <header>
                   <h2 id="contact-head-text">Contactez-moi</h2>
-                  <img src="assets/icons/close.svg" class="close" alt="Close Modal"/>
+                  <img src="assets/icons/close.svg" class="close" role="button" alt="Fermer le formulaire"/>
               </header>
               <form id="contact" method="get" action="">
-                  <div>
-                      <label for="first">Prénom</label>
-                      <input type="text" id="first"/>
-                      <label for="last">Nom</label>
-                      <input type="text" id="last"/>
-                      <label for="email">Email</label>
-                      <input type="email" id="email" autocomplete="on"/>
-                      <label for="message">Votre Message</label>
-                      <input type="text" id="message"/>
-                  </div>
-                  <button type="submit" class="contact_button">Envoyer</button>
-              </form>
+                <div>
+                    <label for="first">Prénom</label>
+                    <input type="text" id="first" name="first"/>
+                    <label for="last">Nom</label>
+                    <input type="text" id="last" name="last"/>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" autocomplete="on"/>
+                    <label for="message">Votre Message</label>
+                    <textarea id="message" name="message"></textarea>  
+                </div>
+                <input type="hidden" id="photographer-id" name="id" value="">
+                <button type="submit" class="contact_button">Envoyer</button>
+            </form>
+            
           </div>
       </div>
 
-    <div id="carousel-modal" class="carousel-modal" role="dialog" aria-label="image closeup view">
+    <div id="carousel-modal" class="carousel-modal" role="dialog" aria-label="Afficher les images en grand">
         <span class="close-carousel">&times;</span>
         <div class="carousel-content">
             <div class="carousel-inner">
