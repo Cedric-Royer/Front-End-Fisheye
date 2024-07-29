@@ -78,10 +78,12 @@
 
 .dropdown-content a:hover {
     background: #DB8876;
+    color: black;
 }
 
-.dropdown-content a:focus {
+.dropdown-content a.focused {
     background: #DB8876;
+    color: black;
 }
 
 .dropdown-content a:first-child {

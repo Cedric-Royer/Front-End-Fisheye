@@ -13,7 +13,7 @@ function mediaTemplate(data) {
         if (image) {
             const link = document.createElement('a');
             link.href = '#';
-            link.setAttribute("arial-label", `${title} voir en plus grand`);
+            link.setAttribute("aria-label", `"${title}": voir l'image originale.`);
             link.addEventListener('click', (event) => {
                 event.preventDefault();
                 window.openCarousel(index);
@@ -29,6 +29,7 @@ function mediaTemplate(data) {
         } else if (video) {
             const link = document.createElement('a');
             link.href = '#';
+            link.setAttribute("aria-label", `"${title}": voir la vidéo.`);
             link.addEventListener('click', (event) => {
                 event.preventDefault();
                 window.openCarousel(index);
@@ -47,7 +48,6 @@ function mediaTemplate(data) {
 
         const mediaTitle = document.createElement('h2');
         mediaTitle.textContent = title;
-        mediaTitle.setAttribute("lang", "en");
         titleLikesContainer.appendChild(mediaTitle);
 
         const mediaLikes = document.createElement('p');

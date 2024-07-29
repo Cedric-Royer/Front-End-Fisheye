@@ -17,6 +17,18 @@
     left: 10vw;
 }
 
+button.contact_button[type="submit"]:hover {
+    background: #f2d9d5;
+    color: black;   
+    border: solid 1px black;
+}
+
+button.contact_button[type="submit"]:focus       {
+    background: #f2d9d5;
+    color: black;
+    border: solid 1px black;
+}
+
 .modal {
     border-radius: 5px;
     background-color: #DB8876;

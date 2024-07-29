@@ -6,6 +6,7 @@ export function setupDropdown(displayPhotographerMedia) {
     const chevronUp = dropdownButton.querySelector('.fa-chevron-up');
     const dropdownLinks = document.querySelectorAll('.dropdown-content a');
     let focusedIndex = 0;
+    let isDropdownOpen = false;
 
     function toggleDropdown() {
         const isOpen = dropdownContent.classList.contains('show');
@@ -13,6 +14,7 @@ export function setupDropdown(displayPhotographerMedia) {
         chevronDown.classList.toggle('hidden', isOpen);
         chevronUp.classList.toggle('hidden', !isOpen);
         dropdownButton.classList.toggle('hidden-option', isOpen);
+        isDropdownOpen = !isOpen;
 
         if (!isOpen) {
             focusedIndex = 0;
@@ -24,49 +26,52 @@ export function setupDropdown(displayPhotographerMedia) {
 
     dropdownButton.addEventListener('click', toggleDropdown);
 
-    dropdownLinks.forEach((link, index) => {
-        link.addEventListener('click', async (event) => {
+    function handleSelection(link) {
+        const sortBy = link.getAttribute('data-value');
+
+        switch (sortBy) {
+            case 'popularity':
+                selectedOption.textContent = 'Popularité';
+                break;
+            case 'date':
+                selectedOption.textContent = 'Date';
+                break;
+            case 'title':
+                selectedOption.textContent = 'Titre';
+                break;
+            default:
+                selectedOption.textContent = 'Popularité';
+        }
+
+        displayPhotographerMedia(sortBy)
+            .then(() => {
+                dropdownContent.classList.remove('show');
+                dropdownButton.classList.remove('hidden-option');
+                dropdownButton.focus();
+                isDropdownOpen = false;
+            });
+    }
+
+    dropdownLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
             event.preventDefault();
-            const sortBy = link.getAttribute('data-value');
-
-            switch (sortBy) {
-                case 'popularity':
-                    selectedOption.textContent = 'Popularité';
-                    break;
-                case 'date':
-                    selectedOption.textContent = 'Date';
-                    break;
-                case 'title':
-                    selectedOption.textContent = 'Titre';
-                    break;
-                default:
-                    selectedOption.textContent = 'Popularité';
-            }
-
-            await displayPhotographerMedia(sortBy);
-            dropdownContent.classList.remove('show');
-            dropdownButton.classList.remove('hidden-option');
-            dropdownButton.focus();
+            handleSelection(link);
+        });
+        
+        link.addEventListener('focus', () => {
+            link.classList.add('focused');
         });
 
-        link.addEventListener('keydown', (event) => {
-            switch (event.key) {
-                case 'ArrowDown':
-                    event.preventDefault();
-                    focusedIndex = (focusedIndex + 1) % dropdownLinks.length;
-                    updateFocus();
-                    break;
-                case 'ArrowUp':
-                    event.preventDefault();
-                    focusedIndex = (focusedIndex - 1 + dropdownLinks.length) % dropdownLinks.length;
-                    updateFocus();
-                    break;
-                case 'Enter':
-                case ' ':
-                    event.preventDefault();
-                    dropdownLinks[focusedIndex].click();
-                    break;
-            }
+        link.addEventListener('blur', () => {
+            link.classList.remove('focused');
+        });
+
+        link.addEventListener('mouseover', () => {
+            link.classList.add('focused');
+        });
+
+        link.addEventListener('mouseout', () => {
+            link.classList.remove('focused');
         });
     });
 
@@ -74,6 +79,8 @@ export function setupDropdown(displayPhotographerMedia) {
         dropdownLinks.forEach((link, index) => {
             if (index === focusedIndex) {
                 link.focus();
+            } else {
+                link.blur();
             }
         });
     }
@@ -96,14 +103,45 @@ export function setupDropdown(displayPhotographerMedia) {
                     dropdownContent.classList.remove('show');
                     dropdownButton.classList.remove('hidden-option');
                     dropdownButton.focus();
+                    isDropdownOpen = false;
                     break;
             }
         } else if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            toggleDropdown();
+            if (document.activeElement === dropdownButton) {
+                event.preventDefault();
+                toggleDropdown();
+            }
         }
     }
 
-    // Attacher l'écouteur d'événements pour la touche Escape
-    document.addEventListener('keydown', handleDropdownKeyboard);
+    function handleGlobalKeyboard(event) {
+        if (event.key === 'Escape' && isDropdownOpen) {
+            event.preventDefault();
+            dropdownContent.classList.remove('show');
+            dropdownButton.classList.remove('hidden-option');
+            dropdownButton.focus();
+            isDropdownOpen = false;
+        }
+    }
+
+    function closeDropdown() {
+        dropdownContent.classList.remove('show');
+        chevronDown.classList.remove('hidden');
+        chevronUp.classList.add('hidden');
+        dropdownButton.classList.remove('hidden-option');
+        dropdownButton.focus();
+        isDropdownOpen = false;
+        focusedIndex = 0; 
+    }
+
+    function handleClickOutside(event) {
+        if (isDropdownOpen && !dropdownContent.contains(event.target) && !dropdownButton.contains(event.target)) {
+            closeDropdown();
+        }
+    }
+
+    document.addEventListener('click', handleClickOutside);
+    dropdownButton.addEventListener('keydown', handleDropdownKeyboard);
+    dropdownContent.addEventListener('keydown', handleDropdownKeyboard);
+    document.addEventListener('keydown', handleGlobalKeyboard);
 }
