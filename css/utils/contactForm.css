@@ -1,5 +1,5 @@
 .bg-modal {
-    height: 100%;
+    height: inherit;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
