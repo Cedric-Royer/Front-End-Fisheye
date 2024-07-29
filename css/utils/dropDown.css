@@ -33,6 +33,17 @@
     margin-left: 100px;
 }
 
+.dropbtn:hover {
+    background: #DB8876;
+    color: black;
+}
+
+.dropbtn:focus {
+    background: #DB8876;
+    color: black;
+}
+
+
 .dropdown-content {
     font-weight: 500;
     position: absolute; 

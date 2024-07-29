@@ -3,7 +3,27 @@ export function setupContactForm() {
     const closeButton = document.querySelector("#contact_modal .close");
     const modal = document.getElementById("contact_modal");
     const bgModal = document.querySelector(".bg-modal");
-    const main = document.querySelector("main")
+    const main = document.querySelector("main");
+    const focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+    let focusableElements;
+    let firstFocusableElement;
+    let lastFocusableElement;
+
+    function trapFocus(event) {
+        if (event.key === 'Tab') {
+            if (event.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstFocusableElement) {
+                    event.preventDefault();
+                    lastFocusableElement.focus();
+                }
+            } else { // Tab
+                if (document.activeElement === lastFocusableElement) {
+                    event.preventDefault();
+                    firstFocusableElement.focus();
+                }
+            }
+        }
+    }
 
     function showModal() {
         modal.style.display = "flex";
@@ -12,6 +32,10 @@ export function setupContactForm() {
         window.scrollTo(0, 0);
         modal.setAttribute('tabindex', '0');
         modal.focus();
+        focusableElements = modal.querySelectorAll(focusableElementsString);
+        firstFocusableElement = focusableElements[0];
+        lastFocusableElement = focusableElements[focusableElements.length - 1];
+        modal.addEventListener('keydown', trapFocus);
     }
 
     function hideModal() {
@@ -19,9 +43,10 @@ export function setupContactForm() {
         bgModal.style.display = "none";
         modal.removeAttribute('tabindex', '0');
         main.classList.remove("reduce-opacity");
+        modal.removeEventListener('keydown', trapFocus);
+        openButton.focus();
     }
     
     openButton.addEventListener('click', showModal);
     closeButton.addEventListener('click', hideModal);
-    
 }

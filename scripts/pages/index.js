@@ -1,12 +1,9 @@
 import photographerTemplate from '../templates/photographerTemplate.js';
+import { getData } from '../utils/dataService.js';
 
-async function getPhotographers() {
-    const url = './data/photographers.json';
-    const response = await fetch(url);
-    const data = await response.json();
-
-    return { photographers: data.photographers };
-}
+document.addEventListener('DOMContentLoaded', () => {
+    init();
+});
 
 async function displayPhotographersCards(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
@@ -19,9 +16,6 @@ async function displayPhotographersCards(photographers) {
 }
 
 async function init() {
-    // Récupère les datas des photographes
-    const { photographers } = await getPhotographers();
+    const { photographers } = await getData();
     displayPhotographersCards(photographers);
 }
-
-init();

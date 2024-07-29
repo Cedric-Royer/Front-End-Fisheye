@@ -75,6 +75,16 @@ h2 {
     margin-left: 10px;
 }
 
+.contact_button:hover {
+    background: #DB8876;
+    color: black;
+}
+
+.contact_button:focus {
+    background: #DB8876;
+    color: black;
+}
+
 .photographer-details {
     width: 376px;
     height: 59px;

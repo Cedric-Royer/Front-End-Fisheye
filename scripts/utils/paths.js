@@ -1,3 +1,7 @@
+export function getDataPath() {
+    return './data/photographers.json';
+}
+
 export function getPhotographerPortraitPath(portrait) {
     return `assets/photographers/IDPhotos/${portrait}`;
 }
@@ -13,3 +17,4 @@ export function getMediaImagePath(image) {
 export function getMediaVideoPath(video) {
     return `./assets/photographers/Media/${video}`;
 }
+

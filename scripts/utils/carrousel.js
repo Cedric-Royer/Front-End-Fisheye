@@ -62,6 +62,6 @@ export function setupCarousel() {
             closeCarousel();
         }
     });
-
+    
     window.openCarousel = openCarousel;
 }
