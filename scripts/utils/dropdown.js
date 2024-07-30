@@ -102,7 +102,6 @@ export function setupDropdown(displayPhotographerMedia) {
                     event.preventDefault();
                     dropdownContent.classList.remove('show');
                     dropdownButton.classList.remove('hidden-option');
-                    dropdownButton.focus();
                     isDropdownOpen = false;
                     break;
             }

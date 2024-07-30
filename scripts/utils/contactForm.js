@@ -4,7 +4,7 @@ export function setupContactForm() {
     const modal = document.getElementById("contact_modal");
     const bgModal = document.querySelector(".bg-modal");
     const main = document.querySelector("main");
-    const focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+    const focusableElementsString = 'input:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]';
     let focusableElements;
     let firstFocusableElement;
     let lastFocusableElement;
@@ -46,6 +46,13 @@ export function setupContactForm() {
         modal.removeEventListener('keydown', trapFocus);
         openButton.focus();
     }
+
+    closeButton.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            hideModal();
+        }
+    });
+    
     
     openButton.addEventListener('click', showModal);
     closeButton.addEventListener('click', hideModal);
