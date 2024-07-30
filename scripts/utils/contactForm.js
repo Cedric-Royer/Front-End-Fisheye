@@ -23,6 +23,10 @@ export function setupContactForm() {
                 }
             }
         }
+
+        if (event.key === 'Escape') {
+            hideModal();
+    }
     }
 
     function showModal() {
