@@ -40,6 +40,7 @@ button.contact_button[type="submit"]:focus       {
     padding: 35px;
     margin: auto;
     z-index: 4;
+    max-width: 550px;
 }
 
 .modal header {
