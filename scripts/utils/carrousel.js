@@ -1,4 +1,4 @@
-import {getMediaImagePath, getMediaVideoPath} from '../utils/paths.js';
+import { getMediaImagePath, getMediaVideoPath } from '../utils/paths.js';
 
 export function setupCarousel() {
     const modal = document.getElementById('carousel-modal');
@@ -9,17 +9,50 @@ export function setupCarousel() {
     const body = document.querySelector('body'); 
 
     let currentIndex = 0;
+    let focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+    let focusableElements;
+    let firstFocusableElement;
+    let lastFocusableElement;
+
+    function updateFocusableElements() {
+        focusableElements = modal.querySelectorAll(focusableElementsString);
+        firstFocusableElement = focusableElements[0];
+        lastFocusableElement = focusableElements[focusableElements.length - 1];
+    }
+
+    function trapFocus(event) {
+        if (event.key === 'Tab') {
+            if (event.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstFocusableElement) {
+                    event.preventDefault();
+                    lastFocusableElement.focus();
+                }
+            } else { // Tab
+                if (document.activeElement === lastFocusableElement) {
+                    event.preventDefault();
+                    firstFocusableElement.focus();
+                }
+            }
+        }
+    }
 
     function openCarousel(index) {
         currentIndex = index;
         modal.style.display = 'block';
         displayMedia(currentIndex);
         body.classList.add('modal-open'); 
+
+        // Mise à jour des éléments focusables après l'ouverture de la modale
+        updateFocusableElements();
+        modal.setAttribute('tabindex', '-1');
+        modal.focus();
+        modal.addEventListener('keydown', trapFocus);
     }
 
     function closeCarousel() {
         modal.style.display = 'none';
-        body.classList.remove('modal-open'); 
+        body.classList.remove('modal-open');
+        modal.removeEventListener('keydown', trapFocus);
     }
 
     function displayMedia(index) {
@@ -37,6 +70,9 @@ export function setupCarousel() {
         }
 
         mediaContainer.appendChild(mediaElement);
+
+        // Mettre à jour les éléments focusables après l'ajout de contenu
+        updateFocusableElements();
     }
 
     function showNextMedia() {
@@ -54,14 +90,16 @@ export function setupCarousel() {
     prevBtn.addEventListener('click', showPrevMedia);
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') {
-            showNextMedia();
-        } else if (e.key === 'ArrowLeft') {
-            showPrevMedia();
-        } else if (e.key === 'Escape') {
-            closeCarousel();
+        if (modal.style.display === 'block') { // Vérifier si la modale est ouverte
+            if (e.key === 'ArrowRight') {
+                showNextMedia();
+            } else if (e.key === 'ArrowLeft') {
+                showPrevMedia();
+            } else if (e.key === 'Escape') {
+                closeCarousel();
+            }
         }
     });
-    
+
     window.openCarousel = openCarousel;
 }

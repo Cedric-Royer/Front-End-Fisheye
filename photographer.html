@@ -83,16 +83,17 @@
           </div>
       </div>
 
-    <div id="carousel-modal" class="carousel-modal" role="dialog" aria-label="Afficher les images en grand">
+      <div id="carousel-modal" class="carousel-modal" role="dialog" aria-label="Afficher les images en grand" aria-modal="true" aria-labelledby="carousel-modal-title" aria-live="polite">
         <span class="close-carousel" tabindex="0" aria-label="Fermer le carrousel">&times;</span>
         <div class="carousel-content">
             <div class="carousel-inner">
-                <button class="prev" tabindex="1">&#10094;</button>
-                <div class="carousel-media"></div>
-                <button class="next" tabindex="2">&#10095;</button>
+                <button class="prev" aria-label="Image précédente">&#10094;</button>
+                <div class="carousel-media" id="carousel-modal-title"></div>
+                <button class="next" aria-label="Image suivante">&#10095;</button>
             </div>
         </div>
     </div>
+    
 
 
       <script type="module" src="./scripts/pages/photographer.js"></script>
