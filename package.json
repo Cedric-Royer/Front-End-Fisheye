@@ -4,6 +4,7 @@
   "description": "openclassrooms project",
   "main": "scripts/pages/index.js",
   "scripts": {
+    "start": "npx live-server --port=8080 --open=index.html",
     "lint": "npx eslint ./scripts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "eslint": "^9.8.0",
-    "globals": "^15.8.0"
+    "globals": "^15.8.0",
+    "live-server": "^1.2.2"
   }
 }
