@@ -61,11 +61,12 @@ function mediaTemplate(data) {
         mediaLikes.appendChild(likesIcon);
         titleLikesContainer.appendChild(mediaLikes);
 
-        likesIcon.addEventListener('click', (event) => {
+        likesIcon.addEventListener('click', () => {
             let currentLikes = parseInt(likesText.textContent);
             currentLikes++;
             likesText.textContent = `${currentLikes}`;
         });
+        
 
         mediaElement.appendChild(titleLikesContainer);
 
