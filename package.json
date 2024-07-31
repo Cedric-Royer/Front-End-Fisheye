@@ -2,8 +2,9 @@
   "name": "front-end-fisheye",
   "version": "1.0.0",
   "description": "openclassrooms project",
-  "main": "index.js",
+  "main": "scripts/pages/index.js",
   "scripts": {
+    "lint": "npx eslint ./scripts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
