@@ -5,8 +5,10 @@ export function setupCarousel() {
     const closeBtn = document.querySelector('.close-carousel');
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
-    const mediaContainer = document.querySelector('.carousel-media');
+    const mediaContainer = document.getElementById('media-container');
+    const carouselMediaContainer = document.querySelector('.carousel-media');
     const body = document.querySelector('body'); 
+    
 
     let currentIndex = 0;
     let focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
@@ -53,10 +55,12 @@ export function setupCarousel() {
         modal.style.display = 'none';
         body.classList.remove('modal-open');
         modal.removeEventListener('keydown', trapFocus);
+        const firstMediaLink = mediaContainer.querySelector('a');
+        firstMediaLink.focus();
     }
 
     function displayMedia(index) {
-        mediaContainer.innerHTML = '';
+        carouselMediaContainer.innerHTML = '';
         const media = window.mediaItems[index];
         let mediaElement;
 
@@ -69,7 +73,7 @@ export function setupCarousel() {
             mediaElement.controls = true;
         }
 
-        mediaContainer.appendChild(mediaElement);
+        carouselMediaContainer.appendChild(mediaElement);
 
         // Mettre à jour les éléments focusables après l'ajout de contenu
         updateFocusableElements();
@@ -86,6 +90,11 @@ export function setupCarousel() {
     }
 
     closeBtn.addEventListener('click', closeCarousel);
+    closeBtn.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            closeCarousel();
+        }
+    });
     nextBtn.addEventListener('click', showNextMedia);
     prevBtn.addEventListener('click', showPrevMedia);
 
