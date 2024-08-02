@@ -53,15 +53,19 @@ function mediaTemplate(data) {
         const mediaLikes = document.createElement('p');
         const likesText = document.createElement('span');
         likesText.textContent = `${likes}`;
+        const linkLikesIcon = document.createElement('a');
+        linkLikesIcon.setAttribute("href","#");
+        linkLikesIcon.setAttribute("role", "button");
         const likesIcon = document.createElement('span');
         likesIcon.classList.add('fa-solid', 'fa-heart', 'icon-like');
         likesIcon.setAttribute("aria-label", "j'aime");
-        likesIcon.setAttribute("role", "button");
+        //likesIcon.setAttribute("role", "button");
         mediaLikes.appendChild(likesText);
-        mediaLikes.appendChild(likesIcon);
+        linkLikesIcon.appendChild(likesIcon);
+        mediaLikes.appendChild(linkLikesIcon);
         titleLikesContainer.appendChild(mediaLikes);
 
-        likesIcon.addEventListener('click', () => {
+        linkLikesIcon.addEventListener('click', () => {
             let currentLikes = parseInt(likesText.textContent);
             currentLikes++;
             likesText.textContent = `${currentLikes}`;
