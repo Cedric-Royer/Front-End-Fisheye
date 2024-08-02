@@ -23,6 +23,15 @@ body.modal-open {
     font-weight: 500;
     cursor: pointer;
     z-index: 3;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.media-title {
+    font-family: DM Sans;
+    font-size: 24px;
+    font-weight: 400;
+    color: #901C1C;
 }
 
 .carousel-content {

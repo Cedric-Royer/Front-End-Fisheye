@@ -44,7 +44,6 @@ export function setupCarousel() {
         displayMedia(currentIndex);
         body.classList.add('modal-open'); 
 
-        // Mise à jour des éléments focusables après l'ouverture de la modale
         updateFocusableElements();
         modal.setAttribute('tabindex', '-1');
         modal.focus();
@@ -60,25 +59,33 @@ export function setupCarousel() {
     }
 
     function displayMedia(index) {
-        carouselMediaContainer.innerHTML = '';
-        const media = window.mediaItems[index];
+        carouselMediaContainer.innerHTML = ''; 
+        const media = window.mediaItems[index]; 
         let mediaElement;
-
+        let mediaTitle = media.title || ''; 
+    
         if (media.image) {
             mediaElement = document.createElement('img');
             mediaElement.src = getMediaImagePath(media.image);
+            mediaElement.alt = mediaTitle;
         } else if (media.video) {
             mediaElement = document.createElement('video');
             mediaElement.src = getMediaVideoPath(media.video);
             mediaElement.controls = true;
         }
-
+    
         carouselMediaContainer.appendChild(mediaElement);
-
-        // Mettre à jour les éléments focusables après l'ajout de contenu
+    
+        if (mediaTitle) {
+            const titleElement = document.createElement('p');
+            titleElement.textContent = mediaTitle;
+            titleElement.classList.add('media-title'); 
+            carouselMediaContainer.appendChild(titleElement);
+        }
+    
         updateFocusableElements();
     }
-
+    
     function showNextMedia() {
         currentIndex = (currentIndex + 1) % window.mediaItems.length;
         displayMedia(currentIndex);
@@ -99,7 +106,7 @@ export function setupCarousel() {
     prevBtn.addEventListener('click', showPrevMedia);
 
     document.addEventListener('keydown', (e) => {
-        if (modal.style.display === 'block') { // Vérifier si la modale est ouverte
+        if (modal.style.display === 'block') {
             if (e.key === 'ArrowRight') {
                 showNextMedia();
             } else if (e.key === 'ArrowLeft') {

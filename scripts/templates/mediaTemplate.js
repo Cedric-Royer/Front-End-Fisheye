@@ -38,7 +38,7 @@ function mediaTemplate(data) {
             const videoElement = document.createElement('video');
             videoElement.src = mediaVideoPath;
             videoElement.controls = false;
-
+            videoElement.setAttribute("tabindex","-1");
             link.appendChild(videoElement);
             mediaElement.appendChild(link);
         }
