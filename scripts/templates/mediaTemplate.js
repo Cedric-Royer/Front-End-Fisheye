@@ -59,18 +59,17 @@ function mediaTemplate(data) {
         const likesIcon = document.createElement('span');
         likesIcon.classList.add('fa-solid', 'fa-heart', 'icon-like');
         likesIcon.setAttribute("aria-label", "j'aime");
-        //likesIcon.setAttribute("role", "button");
         mediaLikes.appendChild(likesText);
         linkLikesIcon.appendChild(likesIcon);
         mediaLikes.appendChild(linkLikesIcon);
         titleLikesContainer.appendChild(mediaLikes);
 
-        linkLikesIcon.addEventListener('click', () => {
+        linkLikesIcon.addEventListener('click', (event) => {
+            event.preventDefault();
             let currentLikes = parseInt(likesText.textContent);
             currentLikes++;
             likesText.textContent = `${currentLikes}`;
-        });
-        
+        });     
 
         mediaElement.appendChild(titleLikesContainer);
 
