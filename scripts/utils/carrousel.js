@@ -68,6 +68,7 @@ export function setupCarousel() {
             mediaElement = document.createElement('img');
             mediaElement.src = getMediaImagePath(media.image);
             mediaElement.alt = mediaTitle;
+            mediaElement.setAttribute("role","img");
         } else if (media.video) {
             mediaElement = document.createElement('video');
             mediaElement.src = getMediaVideoPath(media.video);

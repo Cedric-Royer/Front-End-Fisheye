@@ -139,9 +139,16 @@ h2 {
     align-items: center;
 }
 
+.like-number {
+    font-size: 1.17em;
+}
+
 .icon-like {
-    margin-left: 5px;
     color: black;
+    font-size: 1.17em;
+    border-color: transparent;
+    background-color: transparent;
+    padding-left: 6px;
 }
 
 .media-container .icon-like {

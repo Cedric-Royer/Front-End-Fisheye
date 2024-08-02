@@ -28,7 +28,7 @@
                     role="button" 
                     aria-haspopup="menu" 
                     aria-expanded="false" 
-                    aria-label="Ouvre une liste d'options de tri" 
+                    aria-label="Liste d'options de tri" 
                     aria-controls="dropdown-list">
                 <span id="selected-option" class="selected-option">Popularité</span>
                 <span class="fa-solid fa-chevron-down"></span>
@@ -83,12 +83,13 @@
           </div>
       </div>
 
-      <div id="carousel-modal" class="carousel-modal" role="dialog" aria-label="Afficher les images en grand" aria-modal="true" aria-labelledby="carousel-modal-title" aria-live="polite">
+      <div id="carousel-modal" class="carousel-modal" role="dialog" aria-labelledby="carousel-modal-title" aria-modal="true">
+        <h2 id="carousel-modal-title" class="sr-only">Galerie de médias</h2>
         <button class="close-carousel" tabindex="0" aria-label="Fermer le carrousel">&times;</button>
         <div class="carousel-content">
             <div class="carousel-inner">
                 <button class="prev" aria-label="Image précédente">&#10094;</button>
-                <div class="carousel-media" id="carousel-modal-title"></div>
+                <div class="carousel-media"></div>
                 <button class="next" aria-label="Image suivante">&#10095;</button>
             </div>
         </div>
