@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "openclassrooms project",
   "main": "scripts/pages/index.js",
+  "type": "module",
   "scripts": {
     "start": "http-server . -p 8080",
     "lint": "npx eslint ./scripts",
