@@ -51,6 +51,7 @@ button.contact_button[type="submit"]:focus       {
 
 .modal header img {
     cursor: pointer;
+    width: 42px;
 }
 
 .modal header h2 {
