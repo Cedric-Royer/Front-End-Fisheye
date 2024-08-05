@@ -1,103 +1,103 @@
 <!DOCTYPE html>
 <html lang="fr">
     
-  <head>
-      <link href="css/style.css" rel="stylesheet" type="text/css">
-      <meta charset="utf-8">
-      <link rel="icon" type="image/png" href="assets/favicon.png">
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
-      <title>Fisheye - photographe </title>
-  </head>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="assets/favicon.png">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <title>Fisheye - photographe </title>
+    </head>
 
-  <body>
+    <body>
 
-      <header class="top-banner">
-          <a href="./index.html"><img src="assets/images/logo.png" class="logo" alt="Page d'accueil Fisheye"></a>
-      </header>
+        <header class="top-banner">
+            <a href="./index.html"><img src="assets/images/logo.png" class="logo" alt="Page d'accueil Fisheye"></a>
+        </header>
 
-      <main id="main">
+        <main id="main">
 
-        <section class="photograph-header">
-            <button class="contact_button open">Contactez-moi</button>
-        </section>
+            <section class="photograph-header">
+                <button class="contact_button open">Contactez-moi</button>
+            </section>
 
-        <div class="dropdown">
-            <span class="sort-text" id="sort-label">Trier par:</span>
-            <button class="dropbtn" 
-                    role="button" 
-                    aria-haspopup="menu" 
-                    aria-expanded="false" 
-                    aria-label="Liste d'options de tri" 
-                    aria-controls="dropdown-list">
-                <span id="selected-option" class="selected-option">Popularité</span>
-                <span class="fa-solid fa-chevron-down"></span>
-                <span class="fa-solid fa-chevron-up hidden"></span>
-            </button>
-            <div id="dropdown-list" class="dropdown-content" 
-                 role="menu" 
-                 aria-labelledby="sort-label">
-                <a href="#" data-value="popularity" role="menuitem">
-                    Popularité
-                    <span class="fa-solid fa-chevron-up"></span>
-                </a>
-                <hr class="separator" aria-hidden="true">
-                <a href="#" data-value="date" role="menuitem">
-                    Date
-                </a>
-                <hr class="separator" aria-hidden="true">
-                <a href="#" data-value="title" role="menuitem">
-                    Titre
-                </a>
-            </div>
-        </div>
-        
-        <section id="media-container" class="media-container" tabindex="-1">
-        </section>
-
-        <div class="bg-modal"></div>
-
-      </main>
-
-      <div id="contact_modal" class="modal-container" role="dialog" aria-labelledby="contact-head-text">
-          <div class="modal">
-              <header>
-                  <h2 id="contact-head-text">Contactez-moi</h2>
-                  <img src="assets/icons/close.svg" class="close" role="button" aria-label="Fermer le formulaire" alt="icone de fermeture" tabindex="0"/>
-              </header>
-              <form id="contact" method="get" action="">
-                <div>
-                    <label for="first">Prénom</label>
-                    <input type="text" id="first" name="first" required>
-                    <label for="last">Nom</label>
-                    <input type="text" id="last" name="last" required>
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" autocomplete="on" required>
-                    <label for="message">Votre Message</label>
-                    <textarea id="message" name="message" required></textarea>  
+            <div class="dropdown">
+                <span class="sort-text" id="sort-label">Trier par:</span>
+                <button class="dropbtn" 
+                        role="button" 
+                        aria-haspopup="menu" 
+                        aria-expanded="false" 
+                        aria-label="Liste d'options de tri" 
+                        aria-controls="dropdown-list">
+                    <span id="selected-option" class="selected-option">Popularité</span>
+                    <span class="fa-solid fa-chevron-down"></span>
+                    <span class="fa-solid fa-chevron-up hidden"></span>
+                </button>
+                <div id="dropdown-list" class="dropdown-content" 
+                    role="menu" 
+                    aria-labelledby="sort-label">
+                    <a href="#" data-value="popularity" role="menuitem">
+                        Popularité
+                        <span class="fa-solid fa-chevron-up"></span>
+                    </a>
+                    <hr class="separator" aria-hidden="true">
+                    <a href="#" data-value="date" role="menuitem">
+                        Date
+                    </a>
+                    <hr class="separator" aria-hidden="true">
+                    <a href="#" data-value="title" role="menuitem">
+                        Titre
+                    </a>
                 </div>
-                <input type="hidden" id="photographer-id" name="id" value="">
-                <button type="submit" class="contact_button">Envoyer</button>
-            </form>
+            </div>
             
-          </div>
-      </div>
+            <section id="media-container" class="media-container" tabindex="-1">
+            </section>
 
-      <div id="carousel-modal" class="carousel-modal" role="dialog" aria-labelledby="carousel-modal-title" aria-modal="true">
-        <h2 id="carousel-modal-title" class="sr-only">Galerie de médias</h2>
-        <button class="close-carousel" tabindex="0" aria-label="Fermer le carrousel">&times;</button>
-        <div class="carousel-content">
-            <div class="carousel-inner">
-                <button class="prev" aria-label="Image précédente">&#10094;</button>
-                <div class="carousel-media"></div>
-                <button class="next" aria-label="Image suivante">&#10095;</button>
+            <div class="bg-modal"></div>
+
+        </main>
+
+        <div id="contact_modal" class="modal-container" role="dialog" aria-labelledby="contact-head-text">
+            <div class="modal">
+                <header>
+                    <h2 id="contact-head-text">Contactez-moi</h2>
+                    <img src="assets/icons/close.svg" class="close" role="button" aria-label="Fermer le formulaire" alt="icone de fermeture" tabindex="0"/>
+                </header>
+                <form id="contact" method="get" action="">
+                    <div>
+                        <label for="first">Prénom</label>
+                        <input type="text" id="first" name="first" required>
+                        <label for="last">Nom</label>
+                        <input type="text" id="last" name="last" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" autocomplete="on" required>
+                        <label for="message">Votre Message</label>
+                        <textarea id="message" name="message" required></textarea>  
+                    </div>
+                    <input type="hidden" id="photographer-id" name="id" value="">
+                    <button type="submit" class="contact_button">Envoyer</button>
+                </form>
+                
             </div>
         </div>
-    </div>
+
+        <div id="carousel-modal" class="carousel-modal" role="dialog" aria-labelledby="carousel-modal-title" aria-modal="true">
+            <h2 id="carousel-modal-title" class="sr-only">Galerie de médias</h2>
+            <button class="close-carousel" aria-label="Fermer le carrousel">&times;</button>
+            <div class="carousel-content">
+                <div class="carousel-inner">
+                    <button class="prev" aria-label="Média précédent">&#10094;</button>
+                    <div class="carousel-media"></div>
+                    <button class="next" aria-label="Média suivant">&#10095;</button>
+                </div>
+            </div>
+        </div>
     
-
-
       <script type="module" src="./scripts/pages/photographer.js"></script>
 
-  </body>
+    </body>
+
 </html>

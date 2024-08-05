@@ -20,6 +20,7 @@ export function setupCarousel() {
         focusableElements = modal.querySelectorAll(focusableElementsString);
         firstFocusableElement = focusableElements[0];
         lastFocusableElement = focusableElements[focusableElements.length - 1];
+        firstFocusableElement.focus();
     }
 
     function trapFocus(event) {
@@ -43,11 +44,9 @@ export function setupCarousel() {
         modal.style.display = 'block';
         displayMedia(currentIndex);
         body.classList.add('modal-open'); 
-
-        updateFocusableElements();
-        modal.setAttribute('tabindex', '-1');
         modal.focus();
         modal.addEventListener('keydown', trapFocus);
+        updateFocusableElements();
     }
 
     function closeCarousel() {
@@ -84,7 +83,6 @@ export function setupCarousel() {
             carouselMediaContainer.appendChild(titleElement);
         }
     
-        updateFocusableElements();
     }
     
     function showNextMedia() {
@@ -109,8 +107,10 @@ export function setupCarousel() {
     document.addEventListener('keydown', (e) => {
         if (modal.style.display === 'block') {
             if (e.key === 'ArrowRight') {
+                e.preventDefault();
                 showNextMedia();
             } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
                 showPrevMedia();
             } else if (e.key === 'Escape') {
                 closeCarousel();

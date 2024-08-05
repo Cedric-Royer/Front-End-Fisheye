@@ -26,7 +26,7 @@ export function setupContactForm() {
 
         if (event.key === 'Escape') {
             hideModal();
-    }
+        }
     }
 
     function showModal() {
@@ -34,21 +34,24 @@ export function setupContactForm() {
         bgModal.style.display = "flex";
         main.classList.add("reduce-opacity");
         window.scrollTo(0, 0);
-        modal.setAttribute('tabindex', '0');
-        modal.focus();
+
         focusableElements = modal.querySelectorAll(focusableElementsString);
-        firstFocusableElement = focusableElements[0];
-        lastFocusableElement = focusableElements[focusableElements.length - 1];
-        modal.addEventListener('keydown', trapFocus);
+        if (focusableElements.length > 0) {
+            firstFocusableElement = focusableElements[0];
+            lastFocusableElement = focusableElements[focusableElements.length - 1];
+            firstFocusableElement.focus();
+            modal.addEventListener('keydown', trapFocus);
+        } else {
+            closeButton.focus();
+        }
     }
 
     function hideModal() {
         modal.style.display = "none";
         bgModal.style.display = "none";
-        modal.removeAttribute('tabindex', '0');
         main.classList.remove("reduce-opacity");
         modal.removeEventListener('keydown', trapFocus);
-        openButton.focus();
+        openButton.focus(); 
     }
 
     closeButton.addEventListener('keypress', function(event) {
@@ -56,8 +59,7 @@ export function setupContactForm() {
             hideModal();
         }
     });
-    
-    
+
     openButton.addEventListener('click', showModal);
     closeButton.addEventListener('click', hideModal);
 }
