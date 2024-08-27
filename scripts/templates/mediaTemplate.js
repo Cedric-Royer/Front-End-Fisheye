@@ -1,13 +1,5 @@
 import { getMediaImagePath, getMediaVideoPath } from '../utils/paths.js';
-
-function addLike(likesText, mediaElement) {
-    if (!mediaElement.hasAttribute('data-liked')) {
-        let currentLikes = parseInt(likesText.textContent, 10);
-        currentLikes++;
-        likesText.textContent = `${currentLikes}`;
-        mediaElement.setAttribute('data-liked', 'true');
-    }
-}
+import {addLike} from '../utils/addLike.js';
 
 function createTitleLikesContainer(title, likes, mediaElement) {
     const container = document.createElement('div');
