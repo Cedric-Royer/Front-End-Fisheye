@@ -19,14 +19,13 @@
 
         <main id="main">
 
-            <section class="photograph-header">
+            <divclass="photograph-header">
                 <button class="contact_button open">Contactez-moi</button>
-            </section>
+        </div>
 
             <div class="dropdown">
                 <span class="sort-text" id="sort-label">Trier par:</span>
                 <button class="dropbtn" 
-                        role="button" 
                         aria-haspopup="menu" 
                         aria-expanded="false" 
                         aria-label="Liste d'options de tri" 
@@ -53,8 +52,8 @@
                 </div>
             </div>
             
-            <section id="media-container" class="media-container" tabindex="-1">
-            </section>
+            <div id="media-container" class="media-container" tabindex="-1">
+            </div>
 
             <div class="bg-modal"></div>
 
@@ -64,9 +63,9 @@
             <div class="modal">
                 <header>
                     <h2 id="contact-head-text">Contactez-moi</h2>
-                    <img src="assets/icons/close.svg" class="close" role="button" aria-label="Fermer le formulaire" alt="icone de fermeture" tabindex="0"/>
+                    <img src="assets/icons/close.svg" class="close" role="button" aria-label="Fermer le formulaire" alt="icone de fermeture" tabindex="0">
                 </header>
-                <form id="contact" method="get" action="">
+                <form id="contact" method="get">
                     <div>
                         <label for="first">Prénom</label>
                         <input type="text" id="first" name="first" required>
