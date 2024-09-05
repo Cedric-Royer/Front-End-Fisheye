@@ -48,6 +48,7 @@ export async function displayPhotographerDetails() {
     photographerDetails.classList.add('photographer-details');
     const photographerLikes = document.createElement('div');
     const totalLikesElement = document.createElement('span');
+    totalLikesElement.setAttribute('id', 'total-likes');
     totalLikesElement.textContent = totalLikes;
     const likesIcon = document.createElement('i');
     likesIcon.classList.add('fa-solid', 'fa-heart', 'icon-like');
